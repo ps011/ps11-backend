@@ -1,12 +1,16 @@
 var express = require('express');
-const dbUtil = require('../utils/database');
 const blog = require('../schemas/blog.schema');
 var router = express.Router();
 
 /* GET blogs listing. */
 router.get('/', function(req, res, next) {
-    console.log(dbUtil.getDb());
-    res.send('Default blog route is working fine');
+    blog.find({}, (err, blogList) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(blogList);
+        }
+    })
 });
 
 router.post('/create', (req, res) => {
@@ -27,6 +31,16 @@ router.post('/create', (req, res) => {
             res.send(doc);
         }
     })
-})
+});
+
+router.get('/:id', (req, res) => {
+    blog.findOne({ link: req.body.link }, (err, blog) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(blog);
+        }
+    })
+});
 
 module.exports = router;
