@@ -2,11 +2,6 @@ const mongoose = require('../utils/database').getMongoose();
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    id: {
-        type: String,
-        unique: true,
-        autoIncrement: true
-    },
     title:  String,
     thumbnail: String,
     banner: String,

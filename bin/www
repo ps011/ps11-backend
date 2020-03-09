@@ -83,13 +83,14 @@ function onError(error) {
  */
 
 function onListening() {
-  mongoUtil.connectToServer( function( err, client ) {
-    if (err) console.log(err);
-    console.log('Mongo Client', client)
+  mongoUtil.connectToServer().then(db => {
     var addr = server.address();
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
-  } );
+    console.log('Listening on ' + bind);
+  }).catch(err => {
+    console.log('Error in connecting to Database', err.message)
+    process.exit();
+  })
 }
