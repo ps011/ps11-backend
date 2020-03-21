@@ -5,7 +5,7 @@ const aboutSchema = new Schema({
     name: String,
     imageUrl:  String,
     about: String,
-    resumeUrl: string
+    resumeUrl: String
 });
 
 module.exports = mongoose.model('About', aboutSchema);
