@@ -34,8 +34,8 @@ router.post('/update-score', async (req, res) => {
         if (user.password === Buffer.from(req.body.password).toString('base64')) {
             let score = parseInt(user.score) + parseInt(req.body.score);
             try {
-                await codingChallenge.findByIdAndUpdate(req.body.userId, {score}, {new: true})
-                res.send("Score Updated Successfully");
+                const result = await codingChallenge.findByIdAndUpdate(req.body.userId, {score}, {new: true})
+                res.send({message: "Score updated", data: {score: result.score}});
             } catch (e) {
                 res.status(500).send("An error occurred in updating score");
             }
