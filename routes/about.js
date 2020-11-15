@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/:name', async (req, res) => {
     try {
-        const result = await about.find({ name: req.params.name });
+        const result = await about.findOne({ name: req.params.name });
         res.status(200).send(result);
     } catch (e) {
         res.status(404).send(e.message);
