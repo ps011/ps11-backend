@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const result = await blog.find({});
+        const result = await blog.find({}).sort('-date');
         res.status(200).send(result);
     } catch (e) {
         res.status(404).send(e.message);
