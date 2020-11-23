@@ -12,7 +12,7 @@ const blogSchema = new Schema({
     tags: String,
     content:   String,
     link: String,
-    hidden: Boolean
+    hidden: { type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Blog', blogSchema);
