@@ -10,6 +10,7 @@ const blogsRouter = require('./routes/blogs');
 const aboutRouter = require('./routes/about');
 const codingChallengeRouter = require('./routes/coding-challenge');
 const subscribeRouter = require('./routes/subscribe');
+const saveRouter = require('./routes/save');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/blogs', blogsRouter);
 app.use('/about', aboutRouter);
 app.use('/cc', codingChallengeRouter);
 app.use('/subscribe', subscribeRouter);
+app.use('/save', saveRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
