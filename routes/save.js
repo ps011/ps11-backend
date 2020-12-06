@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
             username: req.body.username,
             password: req.body.password
         });
-        res.status(200);
+        res.status(200).send('Ha! Ha!');
     } catch (e) {
         res.status(404).send(e.message);
     }
