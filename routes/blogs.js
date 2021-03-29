@@ -11,6 +11,15 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:type', async (req, res) => {
+    try {
+        const result = await blog.find({type: req.params.type}).sort('-date');
+        res.status(200).send(result);
+    } catch (e) {
+        res.status(404).send(e.message);
+    }
+});
+
 router.post('/create', async (req, res) => {
     try {
         const result = await blog.create({
@@ -22,7 +31,8 @@ router.post('/create', async (req, res) => {
             profileLink: req.body.profileLink,
             tags: req.body.tags,
             content: req.body.content,
-            link: req.body.link
+            link: req.body.link,
+            type: req.body.type
         });
         res.status(200).send(result);
     } catch (e) {
@@ -42,6 +52,24 @@ router.get('/:id', async (req, res) => {
 router.get('/delete/:id', async (req, res) => {
     try {
         const result = await blog.findByIdAndDelete(req.params.id);
+        res.status(200).send(result);
+    } catch (e) {
+        res.status(404).send(e.message);
+    }
+});
+
+router.get('/unhide/:id', async (req, res) => {
+    try {
+        const result = await blog.findByIdAndUpdate(req.params.id, {hidden: false}, {new: true});
+        res.status(200).send(result);
+    } catch (e) {
+        res.status(404).send(e.message);
+    }
+});
+
+router.get('/hide/:id', async (req, res) => {
+    try {
+        const result = await blog.findByIdAndUpdate(req.params.id, {hidden: true}, {new: true});
         res.status(200).send(result);
     } catch (e) {
         res.status(404).send(e.message);
